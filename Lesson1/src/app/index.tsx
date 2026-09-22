@@ -128,6 +128,9 @@ export default function App() {
            <View style={[styles.box, styles.box5]}>
              <Text style={styles.textWhite}>5</Text>
            </View>
+           {/* <View style={[styles.box, styles.box7]}>
+              
+            </View> */}
           </View>
         </View>
 
@@ -189,6 +192,7 @@ const styles = StyleSheet.create({
   box4: { flex: 1, backgroundColor: "#21BA45" },
   box5: { flex: 1, backgroundColor: "#8A2BE2" },
   box6: { flex: 1, backgroundColor: "#F2711C" },
+  // box7: { flex: 1, backgroundColor: "#ffffff" },
 
   textWhite: { fontSize: 50, fontWeight: "bold", color: "#ffffff" },
   textBlack: { fontSize: 50, fontWeight: "bold", color: "#000000" },
