@@ -33,6 +33,7 @@ export default function App() {
             <View style={[styles.box, styles.box5]}>
               <Text style={styles.textWhite}>5</Text>
             </View>
+            <View style={styles.spacer} />
           </View>
         </View>
 
@@ -46,7 +47,7 @@ export default function App() {
 
         {/* Footer */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Họ và tên - MSSV</Text>
+          <Text style={styles.footerText}>Nguyễn Ngọc Sơn - BIT240268</Text>
         </View>
 
       </View>
@@ -85,7 +86,10 @@ const styles = StyleSheet.create({
 
   halfRight: {
     flex: 1,
+    flexDirection: 'row',
+    gap: 12,
   },
+
   box: {
     flex: 1,
     justifyContent: 'center',
