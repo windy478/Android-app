@@ -1,0 +1,20 @@
+{
+  "translation": {
+    "appListTitle": "Danh sách Sinh viên",
+    "addStudent": "Thêm Sinh viên",
+    "name": "Họ tên",
+    "studentId": "Mã số SV",
+    "email": "Email",
+    "avatarUrl": "Link ảnh Avatar",
+    "save": "Lưu",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "confirmDelete": "Bạn có muốn xóa thông tin SV này không?",
+    "confirmEdit": "Bạn có muốn sửa thông tin SV không?",
+    "yes": "Có",
+    "no": "Không",
+    "validationError": "Vui lòng nhập đầy đủ thông tin hợp lệ.",
+    "studentDetails": "Chi tiết Sinh viên"
+  }
+}
