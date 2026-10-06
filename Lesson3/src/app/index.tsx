@@ -23,9 +23,22 @@ export default function Screen1() {
       const message = "Hay dien dung thong tin SV va MSV";
 
       if (Platform.OS === "web") {
-        alert("Warning: " + message);
+        alert("Thong bao: " + message);
       } else {
-        Alert.alert("Warning", message);
+        Alert.alert("Thong bao", message);
+      }
+      return;
+    }
+
+    // Lesson4
+    const mssvRegex = /^B[A-Z]{2}2[2-6]\d{4}$/;
+    if (!mssvRegex.test(mssv.trim())) {
+      const errorMsg = "Sai dinh dang ma so sinh vien, vui long thu lai (VD: BBA240146)";
+
+      if (Platform.OS === "web") {
+        alert("Thong bao: " + errorMsg);
+      } else {
+        Alert.alert("Thong bao", errorMsg);
       }
       return;
     }
