@@ -68,17 +68,17 @@ export default function StudentFormScreen() {
   };
 
   const handleSave = () => {
-    // 1. Validate không được bỏ trống
+    //Validate không được bỏ trống
     if (!name.trim() || !studentId.trim() || !email.trim() || !avatar.trim()) {
       const errorMsg = t('validationError') || 'Vui lòng nhập đầy đủ thông tin!';
       Platform.OS === 'web' ? alert('Thong bao: ' + errorMsg) : Alert.alert('Thong bao', errorMsg);
       return;
     }
 
-    // 2. Validate định dạng MSSV (B + 2 chữ hoa + 22->26 + 4 số)
+    //Validate định dạng MSSV (B + 2 chữ hoa + 22->26 + 4 số)
     const mssvRegex = /^B[A-Z]{2}2[2-6]\d{4}$/;
     if (!mssvRegex.test(studentId.trim())) {
-      const errorMsg = 'Sai định dạng MSSV. Vui lòng nhập lại (VD: BBA240146)';
+      const errorMsg = 'Sai dinh dang MSSV. Vui long nhap lai (VD: BBA240146)';
       Platform.OS === 'web' ? alert('Thong bao: ' + errorMsg) : Alert.alert('Thong bao', errorMsg);
       return;
     }
