@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
+  Platform,
   FlatList,
   TouchableOpacity,
   StyleSheet,
@@ -46,20 +47,33 @@ export default function StudentListScreen() {
   };
 
   const deleteStudent = async (idToDelete: string) => {
-    Alert.alert(t("Thong bao "), t("confirmDelete"), [
-      { text: t("no"), style: "cancel" },
-      {
-        text: t("yes"),
-        style: "destructive",
-        onPress: async () => {
-          const newStudents = students.filter(
-            (student) => student.id !== idToDelete,
-          );
-          setStudents(newStudents);
-          await AsyncStorage.setItem("@students", JSON.stringify(newStudents));
-        },
-      },
-    ]);
+    const confirmMsg = t('confirmDelete') ;
+
+    if (Platform.OS === 'web') {
+      const confirmWeb = window.confirm(confirmMsg);
+      if (confirmWeb) {
+        const newStudents = students.filter(student => student.id !== idToDelete);
+        setStudents(newStudents);
+        await AsyncStorage.setItem('@students', JSON.stringify(newStudents));
+      }
+    } else {
+      Alert.alert(
+        t('Thong bao '), 
+        confirmMsg,
+        [
+          { text: t('no'), style: 'cancel' },
+          {
+            text: t('yes'),
+            style: 'destructive',
+            onPress: async () => {
+              const newStudents = students.filter(student => student.id !== idToDelete);
+              setStudents(newStudents);
+              await AsyncStorage.setItem('@students', JSON.stringify(newStudents));
+            },
+          },
+        ]
+      );
+    }
   };
 
   const renderItem = ({ item }: { item: Student }) => (
