@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Switch, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useFocusEffect } from 'expo-router';
@@ -10,6 +10,11 @@ import { Picker } from '@react-native-picker/picker';
 export default function HomeScreen() {
   const router = useRouter();
   const { t, i18n } = useTranslation();
+  // chốt chặn của web
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // dữ liệu
   const [dishes, setDishes] = useState<any[]>([]);
@@ -114,6 +119,10 @@ export default function HomeScreen() {
     </TouchableOpacity>
   );
 
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
@@ -131,10 +140,11 @@ export default function HomeScreen() {
           onChangeText={setSearchQuery}
         />
         <TouchableOpacity style={styles.filterToggleBtn} onPress={() => setShowFilters(!showFilters)}>
-          <Text style={styles.filterToggleText}>⚙️ Filter/Sort</Text>
+          <Text>⚙️ {t('filter_sort')}</Text>
         </TouchableOpacity>
       </View>
 
+      {/* Filter*/}
       {showFilters && (
         <View style={styles.filterPanel}>
           <View style={styles.filterRow}>
@@ -148,22 +158,22 @@ export default function HomeScreen() {
             </View>
             <View style={styles.pickerWrapper}>
               <Picker selectedValue={sortBy} onValueChange={setSortBy} style={{height: 40}}>
-                <Picker.Item label="Price: Low -> High" value="price_asc" />
-                <Picker.Item label="Price: High -> Low" value="price_desc" />
-                <Picker.Item label="Time: Fast -> Slow" value="time_asc" />
+                <Picker.Item label={t('price_asc')} value="price_asc" />
+                <Picker.Item label={t('price_desc')} value="price_desc" />
+                <Picker.Item label={t('time_asc')} value="time_asc" />
               </Picker>
             </View>
           </View>
 
-          <View style={styles.filterRow}>
-            <TextInput style={styles.priceInput} placeholder="Min Price" keyboardType="numeric" value={minPrice} onChangeText={setMinPrice} />
-            <Text> - </Text>
-            <TextInput style={styles.priceInput} placeholder="Max Price" keyboardType="numeric" value={maxPrice} onChangeText={setMaxPrice} />
-            
-            <View style={styles.switchWrapper}>
-              <Switch value={inStockOnly} onValueChange={setInStockOnly} />
-              <Text style={{fontSize: 12}}>In Stock</Text>
-            </View>
+          <View style={styles.priceRow}>
+            <TextInput style={styles.priceInput} placeholder={t('min_price')} keyboardType="numeric" value={minPrice} onChangeText={setMinPrice} />
+            <Text style={styles.dashText}> - </Text>
+            <TextInput style={styles.priceInput} placeholder={t('max_price')} keyboardType="numeric" value={maxPrice} onChangeText={setMaxPrice} />
+          </View>
+          
+          <View style={styles.stockRow}>
+            <Switch value={inStockOnly} onValueChange={setInStockOnly} />
+            <Text>{t('in_stock_only')}</Text>
           </View>
         </View>
       )}
@@ -196,11 +206,14 @@ const styles = StyleSheet.create({
   searchInput: { flex: 1, backgroundColor: '#fff', padding: 10, borderRadius: 8, borderWidth: 1, borderColor: '#ddd' },
   filterToggleBtn: { backgroundColor: '#34495e', justifyContent: 'center', paddingHorizontal: 12, borderRadius: 8 },
   filterToggleText: { color: '#fff', fontWeight: 'bold' },
-  filterPanel: { backgroundColor: '#fff', marginHorizontal: 16, padding: 12, borderRadius: 8, marginBottom: 10, borderWidth: 1, borderColor: '#eee' },
-  filterRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8, gap: 10 },
+  filterPanel: { backgroundColor: '#fff', marginHorizontal: 16, padding: 16, borderRadius: 8, marginBottom: 10, borderWidth: 1, borderColor: '#eee' },
+  filterRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, gap: 10 },
   pickerWrapper: { flex: 1, borderWidth: 1, borderColor: '#ddd', borderRadius: 6, backgroundColor: '#fafafa', overflow: 'hidden', justifyContent: 'center' },
-  priceInput: { flex: 1, borderWidth: 1, borderColor: '#ddd', borderRadius: 6, padding: 8, backgroundColor: '#fafafa' },
-  switchWrapper: { alignItems: 'center' },
+  priceRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
+  priceInput: { flex: 1, borderWidth: 1, borderColor: '#ddd', borderRadius: 6, padding: 10, backgroundColor: '#fafafa', textAlign: 'center' },
+  dashText: { marginHorizontal: 12, fontWeight: 'bold', color: '#555' },
+  stockRow: { flexDirection: 'row', alignItems: 'center' },
+  stockText: { fontSize: 14, fontWeight: 'bold', marginLeft: 8, color: '#333' },  switchWrapper: { alignItems: 'center' },
   listContainer: { padding: 16, paddingBottom: 100 },
   card: { flexDirection: 'row', backgroundColor: '#fff', borderRadius: 12, marginBottom: 12, overflow: 'hidden', elevation: 2 },
   thumbnail: { width: 100, height: 100, backgroundColor: '#eee' },

@@ -22,7 +22,14 @@ const resources = {
       "yes": "Yes",
       "no": "No",
       "language": "Language",
-      "switch_lang": "Switch to Vietnamese"
+      "switch_lang": "Switch to Vietnamese",
+      "price_asc": "Price: Low -> High",
+      "price_desc": "Price: High -> Low",
+      "time_asc": "Time: Fast -> Slow",
+      "min_price": "Min Price",
+      "max_price": "Max Price",
+      "in_stock_only": "In Stock Only",
+      "filter_sort": "Filter/Sort",
     }
   },
   vi: {
@@ -44,7 +51,14 @@ const resources = {
       "yes": "Có",
       "no": "Không",
       "language": "Ngôn ngữ",
-      "switch_lang": "Chuyển sang Tiếng Anh"
+      "switch_lang": "Chuyển sang Tiếng Anh",
+      "price_asc": "Giá: Thấp -> Cao",
+      "price_desc": "Giá: Cao -> Thấp",
+      "time_asc": "T.Gian: Nhanh -> Chậm",
+      "min_price": "Giá thấp nhất",
+      "max_price": "Giá cao nhất",
+      "in_stock_only": "Chỉ hiện món đang bán",
+      "filter_sort": "Lọc/Sắp xếp",
     }
   }
 };

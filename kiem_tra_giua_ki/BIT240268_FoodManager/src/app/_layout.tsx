@@ -10,7 +10,6 @@ export default function Layout() {
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
       if (state.isConnected) {
-        // đồng bộ
         syncService.syncData().then((didSync) => {
           if (didSync) {
              const msg = "Đã đồng bộ dữ liệu offline lên hệ thống thành công!";
@@ -23,6 +22,5 @@ export default function Layout() {
     return () => unsubscribe();
   }, []);
 
-  // ẩn thanh tiêu đề mặc định của hệ thống
   return <Stack screenOptions={{ headerShown: false }} />;
 }

@@ -16,7 +16,6 @@ export default function DishFormScreen() {
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // State lưu trữ dữ liệu
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [prepTime, setPrepTime] = useState('');
@@ -58,7 +57,6 @@ export default function DishFormScreen() {
   };
 
   const handleSave = async () => {
-    // kiểm tra rằng buộc/validation 
     if (!name.trim() || !price.trim() || !prepTime.trim() || !categoryId) {
       showAlert("Lỗi", "Vui lòng nhập đủ Tên, Giá, Thời gian và chọn Loại món!");
       return;
@@ -94,7 +92,7 @@ export default function DishFormScreen() {
         } else {
           await api.addDish(dishData);
         }
-        showAlert("Thành công", "Đã lưu dữ liệu lên hệ thống!");
+        showAlert("Thành công", "Đã lưu dữ liệu lên hệ thống");
       } else {
         if (isEditing) {
            await syncService.saveOfflineAction('UPDATE', { id, ...dishData });
@@ -106,7 +104,7 @@ export default function DishFormScreen() {
       router.back(); 
     } catch (error) {
        console.log(error);
-       showAlert("Lỗi", "Có lỗi xảy ra khi lưu!");
+       showAlert("Lỗi", "Có lỗi xảy ra khi lưu");
     } finally {
       setLoading(false);
     }

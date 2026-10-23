@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from './api';
 
 export const syncService = {
-  // Lưu tạm
   saveOfflineAction: async (actionType: 'ADD' | 'UPDATE' | 'DELETE', data: any) => {
     try {
       const existingStr = await AsyncStorage.getItem('offline-actions');
@@ -15,7 +14,7 @@ export const syncService = {
     }
   },
 
-  // Hàm đẩy dữ liệu lên MockAPI
+  // đẩy dữ liệu lên MockAPI
   syncData: async () => {
     try {
       const actionsStr = await AsyncStorage.getItem('offline-actions');
@@ -26,7 +25,7 @@ export const syncService = {
 
       console.log(`Bắt đầu đồng bộ ${actions.length} thao tác lên mạng...`);
 
-      // vòng lặp đẩy dữ liệu
+      // đẩy dữ liệu
       for (const item of actions) {
         if (item.actionType === 'ADD') {
           await api.addDish(item.data);
@@ -37,7 +36,6 @@ export const syncService = {
         }
       }
 
-      // xóa bộ nhớ tạm
       await AsyncStorage.removeItem('offline-actions');
       console.log('Đồng bộ hoàn tất!');
       return true;

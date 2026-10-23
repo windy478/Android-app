@@ -32,7 +32,7 @@ export default function DishDetailsScreen() {
             setCategoryName(category.BIT240268_Name);
           }
 
-          // mảng ảnh JSON
+          // ảnh JSON
           try {
              const parsedImages = JSON.parse(dishRes.data.BIT240268_DishImage);
              if (Array.isArray(parsedImages)) {
@@ -75,7 +75,6 @@ export default function DishDetailsScreen() {
     }
   };
 
-  // offline mode
   const deleteAction = async () => {
     try {
       setLoading(true);
@@ -86,7 +85,7 @@ export default function DishDetailsScreen() {
          if (Platform.OS === 'web') window.alert("Đã xóa!");
       } else {
          await syncService.saveOfflineAction('DELETE', { id });
-         const msg = "Đã lưu tạm lệnh xóa vào máy. Sẽ tự đồng bộ khi có mạng!";
+         const msg = "Đang lỗi mạng, sẽ tự xóa khi có mạng trở lại";
          Platform.OS === 'web' ? window.alert(msg) : Alert.alert("Offline", msg);
       }
       router.back();
@@ -109,7 +108,6 @@ export default function DishDetailsScreen() {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 50 }}>
-      {/* ảnh Thumbnail và ảnh thường */}
       <View style={styles.imageGallery}>
         {images.length > 0 ? (
            <FlatList
